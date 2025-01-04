@@ -3,7 +3,7 @@ import { styles } from "../styles/common";
 import PageHeader from "../components/PageHeader";
 
 const BASE_URL = "http://localhost:3000"; // Temporary hardcoded value
-
+const PRODUCTION_URL = "import.meta.env.VITE_API_URL"
 const Projects = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [projects, setProjects] = useState([]);
@@ -21,7 +21,7 @@ const Projects = () => {
 
     const fetchProjects = async () => {
         try {
-            console.log('Fetching from:', `${BASE_URL}/api/projects`);
+            console.log('Fetching from:', `${PRODUCTION_URL}/api/projects`);
             const response = await fetch(
                 `${BASE_URL}/api/projects`,
                 {

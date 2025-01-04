@@ -31,7 +31,10 @@ dotenv.config();
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+app.use(cors({
+    origin: ['https://rivercha.dev', 'http://localhost:5173'], // Allow both production and development
+    credentials: true
+}));
 app.use(express.json());
 
 // Debug function
@@ -127,6 +130,6 @@ app.get('/api/projects', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
     debugEnvVariables();
 });
