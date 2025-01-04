@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getAccessToken } from '../utils/AWSAuth';
 import { styles } from "../styles/common";
-import PageHeader from "../components/PageHeader"
+import PageHeader from "../components/PageHeader";
+
+const BASE_URL = "http://localhost:3000"; // Temporary hardcoded value
 
 const Projects = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -20,39 +21,27 @@ const Projects = () => {
 
     const fetchProjects = async () => {
         try {
-            const token = await getAccessToken();
-            console.log('Got token:', token ? 'Token received' : 'No token');
-
+            console.log('Fetching from:', `${BASE_URL}/api/projects`);
             const response = await fetch(
-                "https://awb63ldwlh.execute-api.us-east-1.amazonaws.com/Get_Tables",
+                `${BASE_URL}/api/projects`,
                 {
                     method: "GET",
                     headers: {
-                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
-                        'Origin': window.location.origin,
                     },
-                    mode: 'cors'
                 }
             );
 
             if (!response.ok) {
-                const errorText = await response.text();
-                console.error('API Response:', {
-                    status: response.status,
-                    statusText: response.statusText,
-                    body: errorText
-                });
                 throw new Error(`Failed to fetch projects: ${response.statusText}`);
             }
 
             const data = await response.json();
-            console.log('API Response:', data);
+            console.log('Received data:', data);
             setProjects(Array.isArray(data) ? data : [data]);
             setError(null);
-
         } catch (err) {
-            console.error("Detailed Error:", err);
+            console.error("Error fetching projects:", err);
             setError(err.message || "Failed to load projects. Please try again later.");
             setProjects([]);
         } finally {
