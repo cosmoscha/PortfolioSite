@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="container mx-auto relative px-4">
                 <div className={`${styles.typography.textBase} flex flex-col sm:flex-row items-center justify-between`}>
                     <p className="text-sm md:text-base mb-2 sm:mb-0">
-                        © 2024 <span className="font-semibold">RiverCha.dev</span> | Built with React, Vite, CSS, and AWS Cognito and Boto3
+                        © 2024 <span className="font-semibold">RiverCha.dev</span> | Built with React, Vite, CSS, Lambda, ExpressJS, and Boto3
                     </p>
 
                     <div className={`${styles.typography.textBase} flex items-center gap-4`}>

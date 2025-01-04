@@ -15,45 +15,89 @@ const About = () => {
             <PageHeader title="About Me" />
             <main className={`${styles.pageContentWrapper} pt-32`}>
                 <div className={`${styles.projectContainer} ${styles.pageTransition.base} ${isVisible ? styles.pageTransition.visible : styles.pageTransition.hidden}`}>
-                    <div className={`${styles.firstProjectMobile} space-y-8`}> {/* Added space-y-8 for paragraph spacing */}
+                    <div className={`${styles.firstProjectMobile} space-y-8`}>
                         <p className={`${styles.typography.textBase} text-left`}>
-                            Hi there! I'm River Cha, a software engineer focused on cloud solutions and infrastructure automation.
-                            Currently at Trident Trust Corporate Services, I architect and develop scalable software solutions
-                            for crypto data processing using Python, Go, and AWS services.
+                            Hi there! I'm River Cha, a software engineer with a deep fascination for artificial intelligence
+                            and its potential to transform how we solve complex problems. I'm particularly excited about
+                            building and understanding AI networks, constantly exploring new architectures and approaches
+                            to machine learning.
                         </p>
                         <p className={`${styles.typography.textBase} text-left`}>
-                            My expertise spans infrastructure-as-code with Terraform, containerization with Docker and Kubernetes,
-                            and developing robust data pipelines for both real-time and batch processing. I have a strong
-                            background in financial technology, having previously engineered RESTful APIs for payment processing
-                            systems at Priority Technology Holdings.
+                            When I'm not immersed in code or AI research, you'll likely find me on a trail somewhere.
+                            I'm an avid hiker and camping enthusiast, finding both peace and inspiration in nature.
+                            There's something magical about disconnecting from technology and reconnecting with the
+                            natural world, whether it's a challenging mountain trek or a peaceful weekend camping trip.
                         </p>
                         <p className={`${styles.typography.textBase} text-left`}>
-                            I'm passionate about building efficient, cloud-native applications and implementing automated
-                            solutions that drive operational excellence. Whether it's designing microservices architectures
-                            or optimizing data processing workflows, I focus on creating reliable and scalable systems.
+                            My love for nature extends to my home, where I maintain a diverse collection of plants.
+                            Gardening has become more than just a hobby - it's a way to bring life and tranquility
+                            into my space. From nurturing delicate indoor plants to cultivating outdoor gardens,
+                            I find joy in watching things grow and creating green spaces that promote wellbeing.
                         </p>
                         <p className={`${styles.typography.textBase} text-left`}>
-                            Take a look at my projects to see how I've put these skills into practice!
+                            This blend of technology and nature defines who I am - someone who's equally excited about
+                            advancing the frontiers of AI as I am about spending a quiet morning tending to my plants
+                            or planning the next outdoor adventure. I believe this balance brings a unique perspective
+                            to my work and life.
                         </p>
 
-                        {/* Image container */}
-                        <div className="flex flex-col md:flex-row justify-between items-center mt-12 space-y-8 md:space-y-0 md:space-x-8">
-                            <div className="w-full md:w-1/2 h-72 md:h-96 bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
-                                <img
-                                    src="/ventricosa.jpg"
-                                    alt="Ventricosa"
-                                    className="object-contain h-full w-full p-6"
-                                />
+
+                        <div className="flex flex-col space-y-12 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="flex flex-col items-center w-full">
+                                <div className="w-full aspect-square bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
+                                    <img
+                                        src="/ventricosa.jpg"
+                                        alt="Ventricosa"
+                                        className="object-cover w-full h-full rounded-lg"
+                                    />
+                                </div>
+                                <p className="mt-4 text-base text-gray-300 w-full text-center">My Nepenthes Ventricosa "Porcelain" 7 years old!</p>
                             </div>
-                            <div className="w-full md:w-1/2 h-72 md:h-96 bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
-                                <img
-                                    src="/hills.jpg"
-                                    alt="Vite"
-                                    className="object-contain h-full w-full p-6"
-                                />
+
+                            <div className="flex flex-col items-center w-full">
+                                <div className="w-full aspect-square bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
+                                    <img
+                                        src="/hills.jpg"
+                                        alt="Hiking Adventures"
+                                        className="object-cover w-full h-full rounded-lg"
+                                    />
+                                </div>
+                                <p className="mt-4 text-base text-gray-300 w-full text-center">Top of Brasstown Bald</p>
+                            </div>
+
+                            <div className="flex flex-col items-center w-full">
+                                <div className="w-full aspect-square bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
+                                    <img
+                                        src="/sky.png"
+                                        alt="Nature Views"
+                                        className="object-cover w-full h-full rounded-lg"
+                                    />
+                                </div>
+                                <p className="mt-4 text-base text-gray-300 w-full text-center">Savannah coast</p>
+                            </div>
+
+                            <div className="flex flex-col items-center w-full">
+                                <div className="w-full aspect-square bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
+                                    <img
+                                        src="/plantdaddy.png"
+                                        alt="Plant Collection"
+                                        className="object-cover w-full h-full rounded-lg"
+                                    />
+                                </div>
+                                <p className="mt-4 text-base text-gray-300 w-full text-center">My pinguicula</p>
+                            </div>
+
+                            <div className="flex flex-col items-center w-full">
+                                <div className="w-full aspect-square bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
+                                    <img
+                                        src="/abg.png"
+                                        alt="Botanical Gardens"
+                                        className="object-cover w-full h-full rounded-lg"
+                                    />
+                                </div>
+                                <p className="mt-4 text-base text-gray-300 w-full text-center">Atlanta Botanical Gardens</p>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </main>

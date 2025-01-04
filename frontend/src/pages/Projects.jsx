@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { styles } from "../styles/common";
 import PageHeader from "../components/PageHeader";
 
+// Modify the API URL construction
+const BASE_URL = import.meta.env.VITE_API_URL;
+const API_URL = BASE_URL.startsWith('http') ? BASE_URL : `https://${BASE_URL}`;
 
-const PRODUCTION_URL = import.meta.env.VITE_API_URL
 const Projects = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [projects, setProjects] = useState([]);
@@ -21,19 +23,19 @@ const Projects = () => {
 
     const fetchProjects = async () => {
         try {
-            console.log('Fetching from:', `${PRODUCTION_URL}/api/projects`);
-            const response = await fetch(
-                `${PRODUCTION_URL}/api/projects`,
-                {
-                    method: "GET",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
+            console.log('Fetching from:', `${API_URL}/api/projects`);
+            const response = await fetch(`${API_URL}/api/projects`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                credentials: 'include' // Add this if you need to send cookies
+            });
 
             if (!response.ok) {
-                throw new Error(`Failed to fetch projects: ${response.statusText}`);
+                const errorText = await response.text();
+                throw new Error(`Failed to fetch projects: ${response.status} ${response.statusText} ${errorText}`);
             }
 
             const data = await response.json();
@@ -49,6 +51,7 @@ const Projects = () => {
         }
     };
 
+    // Rest of your component code remains the same
     const renderProjectUrl = (url) => (
         <div className={styles.projectText}>
             <a href={url} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
@@ -57,26 +60,26 @@ const Projects = () => {
         </div>
     );
 
-   const renderProjectCard = (project, index) => (
-    <div key={index} className={styles.projectCard}>  {/* Removed the conditional firstProjectMobile class */}
-        <h3 className={styles.projectTitle}>
-            {project.title || `Project ${index + 1}`}
-        </h3>
-        <p className={styles.projectText}>
-            {project.description || "No description available"}
-        </p>
-        {project.URL && renderProjectUrl(project.URL)}
-        {project.technologies && (
-            <div className={styles.projectTechContainer}>
-                {project.technologies.map((tech, i) => (
-                    <span key={i} className={styles.technologyTag}>
-                        {tech}
-                    </span>
-                ))}
-            </div>
-        )}
-    </div>
-);
+    const renderProjectCard = (project, index) => (
+        <div key={index} className={styles.projectCard}>
+            <h3 className={styles.projectTitle}>
+                {project.title || `Project ${index + 1}`}
+            </h3>
+            <p className={styles.projectText}>
+                {project.description || "No description available"}
+            </p>
+            {project.URL && renderProjectUrl(project.URL)}
+            {project.technologies && (
+                <div className={styles.projectTechContainer}>
+                    {project.technologies.map((tech, i) => (
+                        <span key={i} className={styles.technologyTag}>
+                            {tech}
+                        </span>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
 
     return (
         <div className={styles.mainWrapper}>
