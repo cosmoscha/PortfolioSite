@@ -51,7 +51,7 @@ const About = () => {
                                         className="object-cover w-full h-full rounded-lg"
                                     />
                                 </div>
-                                <p className="mt-4 text-base text-gray-300 w-full text-center">My Nepenthes Ventricosa "Porcelain" 7 years old!</p>
+                                <p className={`${styles.typography.textBase} text-center`}>My Nepenthes Ventricosa "Porcelain" 7 years old!</p>
                             </div>
 
                             <div className="flex flex-col items-center w-full">
@@ -62,7 +62,7 @@ const About = () => {
                                         className="object-cover w-full h-full rounded-lg"
                                     />
                                 </div>
-                                <p className="mt-4 text-base text-gray-300 w-full text-center">Top of Brasstown Bald</p>
+                                <p cclassName={`${styles.typography.textBase} text-center`}>Top of Brasstown Bald</p>
                             </div>
 
                             <div className="flex flex-col items-center w-full">
@@ -73,7 +73,7 @@ const About = () => {
                                         className="object-cover w-full h-full rounded-lg"
                                     />
                                 </div>
-                                <p className="mt-4 text-base text-gray-300 w-full text-center">Savannah coast</p>
+                                <p className={`${styles.typography.textBase} text-center`}>Savannah coast</p>
                             </div>
 
                             <div className="flex flex-col items-center w-full">
@@ -84,7 +84,7 @@ const About = () => {
                                         className="object-cover w-full h-full rounded-lg"
                                     />
                                 </div>
-                                <p className="mt-4 text-base text-gray-300 w-full text-center">My pinguicula</p>
+                                <p className={`${styles.typography.textBase} text-center`}>My pinguicula</p>
                             </div>
 
                             <div className="flex flex-col items-center w-full">
@@ -95,7 +95,7 @@ const About = () => {
                                         className="object-cover w-full h-full rounded-lg"
                                     />
                                 </div>
-                                <p className="mt-4 text-base text-gray-300 w-full text-center">Atlanta Botanical Gardens</p>
+                                <p className={`${styles.typography.textBase} text-center`}>Atlanta Botanical Gardens</p>
                             </div>
                         </div>
                     </div>

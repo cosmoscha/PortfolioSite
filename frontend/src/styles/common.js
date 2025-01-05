@@ -29,6 +29,7 @@ export const styles = {
     glassEffect: "backdrop-blur-md bg-white/30 dark:bg-gray-900/30",
     glassBorder: "border-white/20 dark:border-gray-700/50"
   },
+
   layout: {
     header: "w-full py-4 fixed top-0 left-0 right-0 z-30 border-b", // Mirror of footer
     footer: "w-full py-4 mt-auto fixed bottom-0 left-0 right-0 z-30 border-t",

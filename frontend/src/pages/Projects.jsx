@@ -4,8 +4,9 @@ import PageHeader from "../components/PageHeader";
 
 // Modify the API URL construction
 const BASE_URL = import.meta.env.VITE_API_URL;
+// const BASE_URL = "http://localhost:3001"
 const API_URL = BASE_URL.startsWith('http') ? BASE_URL : `https://${BASE_URL}`;
-
+// const API_URL = "http://localhost:3001"
 const Projects = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [projects, setProjects] = useState([]);

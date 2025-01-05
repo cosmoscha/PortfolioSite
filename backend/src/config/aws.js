@@ -1,7 +1,22 @@
 import { CognitoIdentityProviderClient, InitiateAuthCommand } from '@aws-sdk/client-cognito-identity-provider';
+import crypto from 'crypto';
+
+function calculateSecretHash(username, clientId, clientSecret) {
+    const message = username + clientId;
+    const hmac = crypto.createHmac('SHA256', clientSecret);
+    return hmac.update(message).digest('base64');
+}
 
 export async function getAwsToken() {
-    const client = new CognitoIdentityProviderClient({ region: 'us-east-1' });
+    const secretHash = calculateSecretHash(
+        process.env.AWS_USERNAME,
+        process.env.AWS_CLIENT_ID,
+        process.env.AWS_CLIENT_SECRET
+    );
+
+    const client = new CognitoIdentityProviderClient({
+        region: process.env.AWS_REGION || 'us-east-1'
+    });
 
     const command = new InitiateAuthCommand({
         AuthFlow: 'USER_PASSWORD_AUTH',
@@ -9,6 +24,7 @@ export async function getAwsToken() {
         AuthParameters: {
             USERNAME: process.env.AWS_USERNAME,
             PASSWORD: process.env.AWS_PASSWORD,
+            SECRET_HASH: secretHash
         },
     });
 

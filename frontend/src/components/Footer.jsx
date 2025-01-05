@@ -6,7 +6,13 @@ const Footer = () => {
     const { isDarkMode, toggleTheme } = useTheme();
 
     return (
-        <footer className={`${styles.layout.footer} ${styles.components.glassEffect} ${styles.components.glassBorder}`}>
+        <footer className={`
+            ${styles.layout.footer}
+            ${styles.components.glassEffect}
+            ${styles.components.glassBorder}
+            ml-16 // This matches the sidebar width
+            px-4 // Added horizontal padding to match right side spacing
+        `}>
             <div className="container mx-auto relative px-4">
                 <div className={`${styles.typography.textBase} flex flex-col sm:flex-row items-center justify-between`}>
                     <p className="text-sm md:text-base mb-2 sm:mb-0">

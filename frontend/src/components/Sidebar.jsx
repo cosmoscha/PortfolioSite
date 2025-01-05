@@ -42,9 +42,10 @@ const Sidebar = () => {
       )}
 
       <aside className={`fixed top-0 left-0 h-screen transition-all duration-300 ease-in-out
-        bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-r border-gray-200 dark:border-gray-800 z-50
-        ${isExpanded ? 'w-64' : 'w-16'}`}
-      >
+          bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-r border-gray-200 dark:border-gray-800 z-50
+          ${isExpanded ? (isMobile ? 'w-64' : 'w-64') : 'w-16'}
+          ${isMobile ? 'relative' : 'fixed'}`}  // Changed this line
+        >
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="absolute -right-10 top-4 p-2 rounded-r-lg bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200 dark:border-gray-800"
