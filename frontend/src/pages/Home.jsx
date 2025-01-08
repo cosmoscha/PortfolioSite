@@ -90,9 +90,6 @@ monitoring: [
        const renderTechSection = (title, techs) => {
             if (!techs || !Array.isArray(techs)) return null;
 
-            // Double the array for seamless looping
-            const duplicatedTechs = [...techs, ...techs];
-
             return (
                 <div className="mb-8">
                     <h3 className={`${styles.typography.textBase} font-semibold mb-4`}>{title}</h3>

@@ -20,10 +20,10 @@ const AnimatedBackground = () => {
 
   const renderMeadow = () => (
     <div className="absolute inset-0">
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-300 to-blue-200" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#7B4CFF]/20 to-[#00E5FF]/20" />
       <Clouds />
       {isDarkMode ? <Moon /> : <Sun />}
-      <div className="absolute bottom-0 w-full h-[30vh] bg-gradient-to-t from-green-600 to-green-500" />
+      <div className="absolute bottom-0 w-full h-[30vh] bg-gradient-to-t from-[#7B4CFF]/40 to-[#00E5FF]/30" />
       <div className="absolute bottom-0 w-full">
         {Array.from({ length: 30 }).map((_, i) => (
           <div
@@ -42,7 +42,7 @@ const AnimatedBackground = () => {
       {Array.from({ length: 50 }).map((_, i) => (
         <div
           key={`grass-${i}`}
-          className="absolute bottom-0 w-1 bg-green-700 origin-bottom animate-grass-sway"
+          className="absolute bottom-0 w-1 bg-[#7B4CFF]/60 origin-bottom animate-grass-sway"
           style={{
             left: `${Math.random() * 100}%`,
             height: `${6 + Math.random() * 8}vh`,
@@ -54,7 +54,7 @@ const AnimatedBackground = () => {
   );
 
   const renderNightScene = () => (
-    <div className="relative w-full h-full bg-gray-900" style={{ isolation: 'isolate' }}>
+    <div className="relative w-full h-full bg-[#1A2B4C]" style={{ isolation: 'isolate' }}>
       <Moon />
       <Mountains />
       <ShootingStars />
@@ -86,7 +86,7 @@ const AnimatedBackground = () => {
         ))}
       </div>
 
-      <div className="absolute bottom-0 w-full h-[30vh] bg-gradient-to-t from-gray-800 to-gray-900 z-2" />
+      <div className="absolute bottom-0 w-full h-[30vh] bg-gradient-to-t from-[#1A2B4C] to-[#7B4CFF]/30 z-2" />
     </div>
   );
 

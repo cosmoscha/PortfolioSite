@@ -31,7 +31,7 @@ const Projects = () => {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
-                credentials: 'include' // Add this if you need to send cookies
+                credentials: 'include'
             });
 
             if (!response.ok) {
@@ -52,7 +52,6 @@ const Projects = () => {
         }
     };
 
-    // Rest of your component code remains the same
     const renderProjectUrl = (url) => (
         <div className={styles.projectText}>
             <a href={url} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>

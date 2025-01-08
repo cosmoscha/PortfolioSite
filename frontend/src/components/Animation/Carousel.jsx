@@ -134,8 +134,8 @@ const CarouselSection = ({ title, techs }) => {
     }, [momentum]);
 
     return (
-        <div className="mb-8">
-            <div className="flex items-center gap-4 mb-4">
+        <div className={styles.carousel.container}>
+            <div className={styles.carousel.header}>
                 <h3 className={`${styles.typography.textBase} font-semibold`}>{title}</h3>
                 <div className="relative">
                     <input
@@ -143,27 +143,23 @@ const CarouselSection = ({ title, techs }) => {
                         placeholder="Search..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="px-4 py-2 rounded-full bg-white/10 dark:bg-gray-800/50
-                                 border border-gray-200 dark:border-gray-700
-                                 focus:outline-none focus:ring-2 focus:ring-blue-500
-                                 placeholder:text-gray-400 text-sm w-40
-                                 transition-all duration-300 focus:w-48"
+                        className={styles.carousel.searchInput}
                     />
                     <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className={styles.carousel.searchIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
                 </div>
             </div>
 
-            <div className="relative overflow-hidden">
-                <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white/90 dark:from-gray-900/90 to-transparent z-10"></div>
-                <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white/90 dark:from-gray-900/90 to-transparent z-10"></div>
+            <div className={styles.carousel.carouselWrapper}>
+                <div className={styles.carousel.gradientLeft}></div>
+                <div className={styles.carousel.gradientRight}></div>
 
                 <div
                     ref={carouselRef}
-                    className="flex gap-8 overflow-x-auto hide-scrollbar py-4 cursor-grab active:cursor-grabbing select-none"
+                    className={styles.carousel.scrollContainer}
                     onMouseDown={handleMouseDown}
                     onMouseUp={handleMouseUp}
                     onMouseMove={handleMouseMove}
@@ -174,36 +170,17 @@ const CarouselSection = ({ title, techs }) => {
                     {filteredTechs.map((tech, index) => (
                         <div
                             key={`prefix-${tech.name}-${index}`}
-                            className="flex flex-col items-center flex-shrink-0 w-24 transition-transform duration-300 hover:scale-110"
+                            className={styles.carousel.itemContainer}
                         >
                             <div className="pointer-events-none">
                                 <img
                                     src={tech.icon}
                                     alt={tech.name}
-                                    className="h-12 w-12 mb-2 drop-shadow-lg"
+                                    className={styles.carousel.itemImage}
                                     draggable="false"
                                 />
                             </div>
-                            <span className={`${styles.typography.textBase} text-sm text-center pointer-events-none`}>
-                                {tech.name}
-                            </span>
-                        </div>
-                    ))}
-                    {/* Duplicated set for infinite scroll */}
-                    {filteredTechs.map((tech, index) => (
-                        <div
-                            key={`suffix-${tech.name}-${index}`}
-                            className="flex flex-col items-center flex-shrink-0 w-24 transition-transform duration-300 hover:scale-110"
-                        >
-                            <div className="pointer-events-none">
-                                <img
-                                    src={tech.icon}
-                                    alt={tech.name}
-                                    className="h-12 w-12 mb-2 drop-shadow-lg"
-                                    draggable="false"
-                                />
-                            </div>
-                            <span className={`${styles.typography.textBase} text-sm text-center pointer-events-none`}>
+                            <span className={styles.carousel.itemText}>
                                 {tech.name}
                             </span>
                         </div>

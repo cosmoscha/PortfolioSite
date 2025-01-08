@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, Home, Briefcase, User, LogIn, LogOut } from 'lucide-react';
+import { styles } from '../styles/common';
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -33,47 +34,53 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Overlay for mobile only */}
       {isMobile && isExpanded && (
         <div
-          className="fixed inset-0 bg-black/50 z-40"
+          className={styles.sidebar.overlay}
           onClick={() => setIsExpanded(false)}
         />
       )}
 
-      <aside className={`fixed top-0 left-0 h-screen transition-all duration-300 ease-in-out
-          bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-r border-gray-200 dark:border-gray-800 z-50
-          ${isExpanded ? (isMobile ? 'w-64' : 'w-64') : 'w-16'}
-          ${isMobile ? 'relative' : 'fixed'}`}  // Changed this line
-        >
+      <aside className={`
+        ${styles.sidebar.base}
+        ${styles.sidebar.container}
+        ${isExpanded ? styles.sidebar.expanded : styles.sidebar.collapsed}
+        ${isMobile ? styles.sidebar.mobile : styles.sidebar.fixed}
+      `}>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="absolute -right-10 top-4 p-2 rounded-r-lg bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200 dark:border-gray-800"
+          className={styles.sidebar.toggleButton.wrapper}
         >
-          <Menu className="h-5 w-5 text-gray-800 dark:text-gray-200" />
+          <Menu className={styles.sidebar.toggleButton.icon} />
         </button>
 
-        <div className="p-4 flex items-center justify-center">
-          <Link to="/" className="text-gray-800 dark:text-white text-2xl font-semibold">
+        <div className={styles.sidebar.header.container}>
+          <Link to="/" className={styles.sidebar.header.text}>
             {isExpanded ? 'MyDevSite' : 'M'}
           </Link>
         </div>
 
         <nav className="flex-1">
-          <ul className="px-2 space-y-2">
+          <ul className={styles.sidebar.nav.list}>
             {navItems.map((item, index) => (
               <li key={index}>
                 <Link
                   to={item.path}
-                  className={`flex items-center px-3 py-3 rounded-lg transition-all duration-300 w-full
+                  className={`
+                    ${styles.sidebar.nav.item.base}
                     ${location.pathname === item.path
-                      ? 'bg-blue-600/80 text-white'
-                      : 'text-gray-800 hover:bg-white/20 dark:text-gray-100 dark:hover:bg-gray-800/50'}
-                    ${isExpanded ? 'justify-start' : 'justify-center'}`}
+                      ? styles.sidebar.nav.item.active
+                      : styles.sidebar.nav.item.inactive}
+                    ${isExpanded
+                      ? styles.sidebar.nav.item.expanded
+                      : styles.sidebar.nav.item.collapsed}
+                  `}
                 >
-                  {item.icon}
+                  {React.cloneElement(item.icon, {
+                    className: styles.sidebar.nav.item.icon
+                  })}
                   {isExpanded && (
-                    <span className="ml-4 whitespace-nowrap">
+                    <span className={styles.sidebar.nav.item.text}>
                       {item.label}
                     </span>
                   )}
@@ -83,16 +90,23 @@ const Sidebar = () => {
           </ul>
         </nav>
 
-        <div className="p-4">
+        <div className={styles.sidebar.auth.container}>
           <button
             onClick={handleAuthAction}
-            className={`flex items-center px-3 py-2 rounded-lg transition-all duration-300
-              text-gray-800 hover:bg-white/20 dark:text-gray-100 dark:hover:bg-gray-800/50
-              ${isExpanded ? 'w-full justify-start' : 'justify-center w-10 mx-auto'}`}
+            className={`
+              ${styles.sidebar.auth.button.base}
+              ${isExpanded
+                ? styles.sidebar.auth.button.expanded
+                : styles.sidebar.auth.button.collapsed}
+            `}
           >
-            {user ? <LogOut size={20} /> : <LogIn size={20} />}
+            {user ? (
+              <LogOut className={styles.sidebar.auth.button.icon} />
+            ) : (
+              <LogIn className={styles.sidebar.auth.button.icon} />
+            )}
             {isExpanded && (
-              <span className="ml-4 whitespace-nowrap">
+              <span className={styles.sidebar.auth.button.text}>
                 {user ? "Sign Out" : "Sign In"}
               </span>
             )}

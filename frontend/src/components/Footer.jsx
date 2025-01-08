@@ -10,16 +10,15 @@ const Footer = () => {
             ${styles.layout.footer}
             ${styles.components.glassEffect}
             ${styles.components.glassBorder}
-            ml-16 // This matches the sidebar width
-            px-4 // Added horizontal padding to match right side spacing
+            ${styles.footer.wrapper}
         `}>
-            <div className="container mx-auto relative px-4">
-                <div className={`${styles.typography.textBase} flex flex-col sm:flex-row items-center justify-between`}>
-                    <p className="text-sm md:text-base mb-2 sm:mb-0">
-                        © 2024 <span className="font-semibold">RiverCha.dev</span> | Built with React, Vite, CSS, Lambda, ExpressJS, and Boto3
+            <div className={styles.footer.container}>
+                <div className={`${styles.typography.textBase} ${styles.footer.content}`}>
+                    <p className={styles.footer.text}>
+                        © 2024 <span className={styles.footer.brand}>RiverCha.dev</span> | Built with React, Vite, CSS, Lambda, ExpressJS, and Boto3
                     </p>
 
-                    <div className={`${styles.typography.textBase} flex items-center gap-4`}>
+                    <div className={`${styles.typography.textBase} ${styles.footer.linkSection}`}>
                         <a href="https://github.com/cosmoscha"
                            target="_blank"
                            rel="noopener noreferrer"
@@ -41,11 +40,11 @@ const Footer = () => {
 
                         <button
                             onClick={toggleTheme}
-                            className={`${styles.components.themeButton} ml-2`}
+                            className={styles.footer.themeButton}
                             aria-label="Toggle theme">
                             {isDarkMode ? (
                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                     className="h-5 w-5"
+                                     className={styles.footer.icon}
                                      fill="none"
                                      viewBox="0 0 24 24"
                                      stroke="currentColor">
@@ -56,7 +55,7 @@ const Footer = () => {
                                 </svg>
                             ) : (
                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                     className="h-5 w-5"
+                                     className={styles.footer.icon}
                                      fill="none"
                                      viewBox="0 0 24 24"
                                      stroke="currentColor">
