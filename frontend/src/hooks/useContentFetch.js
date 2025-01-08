@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const BASE_URL = import.meta.env.VITE_API_URL;
 const API_URL = BASE_URL.startsWith('http') ? BASE_URL : `https://${BASE_URL}`;
 
-const useContentFetch = (endpoint, component) => {
+export const useContentFetch = (endpoint, component) => {  // removed default export
     const [content, setContent] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -21,17 +21,15 @@ const useContentFetch = (endpoint, component) => {
             });
 
             if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Failed to fetch content: ${response.status} ${response.statusText} ${errorText}`);
+                throw new Error(`Failed to fetch content: ${response.status}`);
             }
 
             const data = await response.json();
-            console.log('Received data:', data);
-            setContent(contentArray);
+            setContent(data || []);
             setError(null);
         } catch (err) {
             console.error(`Error fetching ${endpoint}:`, err);
-            setError(err.message || "Failed to load content. Please try again later.");
+            setError(err.message);
             setContent([]);
         } finally {
             setIsLoading(false);
@@ -44,5 +42,3 @@ const useContentFetch = (endpoint, component) => {
 
     return { content, isLoading, error, refetch: fetchContent };
 };
-
-export default useContentFetch;

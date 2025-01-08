@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styles } from "../styles/common";
 import PageHeader from "../components/PageHeader";
-import useContentFetch from '../hooks/useContentFetch';
+import { useContentFetch } from '../hooks/useContentFetch';
 
 const About = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -12,6 +12,14 @@ const About = () => {
         return () => clearTimeout(timer);
     }, []);
 
+    const bodyContent = React.useMemo(() => {
+        if (!aboutContent || !Array.isArray(aboutContent)) return [];
+        return Object.values(aboutContent)
+            .filter(item => item.Component === "About" && !item.Title)
+            .sort((a, b) => parseInt(a.Paragraph) - parseInt(b.Paragraph))
+            .map(item => item.Body);
+    }, [aboutContent]);
+
     return (
         <div className={styles.mainWrapper}>
             <PageHeader title="About Me" />
@@ -19,18 +27,14 @@ const About = () => {
                 <div className={`${styles.projectContainer} ${styles.pageTransition.base} ${isVisible ? styles.pageTransition.visible : styles.pageTransition.hidden}`}>
                     <div className={`${styles.firstProjectMobile} space-y-8`}>
                         {isLoading ? (
-                            <div className={styles.loadingSpinner}>
-                                <div className={styles.spinnerStyle} />
-                            </div>
+                            <div className={styles.loadingSpinner}><div className={styles.spinnerStyle} /></div>
                         ) : error ? (
-                            <div className={styles.errorContainer}>
-                                <p className={styles.errorText}>{error}</p>
-                            </div>
-                        ) : aboutContent.length > 0 ? (
+                            <div className={styles.errorContainer}><p className={styles.errorText}>{error}</p></div>
+                        ) : bodyContent.length > 0 ? (
                             <>
-                                {aboutContent.map((content, index) => (
+                                {bodyContent.map((body, index) => (
                                     <p key={index} className={`${styles.typography.textBase} text-left`}>
-                                        {content.Body}
+                                        {body}
                                     </p>
                                 ))}
                                 

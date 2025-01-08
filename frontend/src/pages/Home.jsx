@@ -2,11 +2,25 @@ import React, { useEffect, useState } from "react";
 import { styles } from "../styles/common";
 import PageHeader from "../components/PageHeader";
 import CarouselSection from '../components/Animation/Carousel';
-import useContentFetch from '../hooks/useContentFetch';
+import { useContentFetch } from '../hooks/useContentFetch';
 
 const Home = () => {
    const [isVisible, setIsVisible] = useState(false);
    const { content: introContent, isLoading, error } = useContentFetch('about', 'Home');
+
+   useEffect(() => {
+       const timer = setTimeout(() => setIsVisible(true), 50);
+       return () => clearTimeout(timer);
+   }, []);
+
+   // Safe filtering and sorting
+   const bodyContent = React.useMemo(() => {
+       if (!introContent || !Array.isArray(introContent)) return [];
+       return Object.values(introContent)
+           .filter(item => item.Component === "Home" && !item.Title)
+           .sort((a, b) => parseInt(a.Paragraph) - parseInt(b.Paragraph))
+           .map(item => item.Body);
+   }, [introContent]);
 
    const technologyIcons = {
     ai: [
@@ -108,13 +122,17 @@ const Home = () => {
                         <div className={styles.loadingSpinner}><div className={styles.spinnerStyle} /></div>
                     ) : error ? (
                         <div className={styles.errorContainer}><p className={styles.errorText}>{error}</p></div>
-                    ) : (
-                        sortedContent.map((content, index) => (
+                    ) : bodyContent.length > 0 ? (
+                        bodyContent.map((body, index) => (
                             <p key={index}
                                className={`${styles.typography.textBase} text-left ${index === 1 ? 'mb-12' : ''}`}>
-                                {content.Body}
+                                {body}
                             </p>
                         ))
+                    ) : (
+                        <div className={styles.emptyStateContainer}>
+                            <p>No content available.</p>
+                        </div>
                     )}
 
                     <h2 className={`${styles.typography.headerSecondary} mb-8`}>Technology Stack</h2>

@@ -8,7 +8,8 @@ router.get('/projects', async (req, res) => {
         const token = await getAwsToken();
 
         const response = await fetch(
-            "https://awb63ldwlh.execute-api.us-east-1.amazonaws.com/Get_Tables",
+            "https://awb63ldwlh.execute-api.us-east-1.amazonaws.com/paragraphs",
+
             {
                 method: "GET",
                 headers: {
@@ -33,4 +34,4 @@ router.get('/projects', async (req, res) => {
     }
 });
 
-export default router;
+export default aboutRoutes;
