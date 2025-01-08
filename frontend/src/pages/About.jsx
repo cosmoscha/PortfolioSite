@@ -1,60 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { styles } from "../styles/common";
 import PageHeader from "../components/PageHeader";
-
-const BASE_URL = import.meta.env.VITE_API_URL;
-const API_URL = BASE_URL.startsWith('http') ? BASE_URL : `https://${BASE_URL}`;
+import useContentFetch from '../hooks/useContentFetch';
 
 const About = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const [aboutContent, setAboutContent] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const { content: aboutContent, isLoading, error } = useContentFetch('about', 'About');
 
     useEffect(() => {
         const timer = setTimeout(() => setIsVisible(true), 50);
         return () => clearTimeout(timer);
     }, []);
-
-    useEffect(() => {
-        fetchAboutContent();
-    }, []);
-
-    const fetchAboutContent = async () => {
-        try {
-            console.log('Fetching from:', `${API_URL}/api/about`);
-            const response = await fetch(`${API_URL}/api/about`, {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                credentials: 'include'
-            });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(`Failed to fetch about content: ${response.status} ${response.statusText} ${errorText}`);
-            }
-
-            const data = await response.json();
-            console.log('Received data:', data);
-
-
-            const contentArray = Object.values(data)
-                .filter(item => item.Component === "About")
-                .sort((a, b) => parseInt(a.Paragraph) - parseInt(b.Paragraph));
-
-            setAboutContent(contentArray);
-            setError(null);
-        } catch (err) {
-            console.error("Error fetching about content:", err);
-            setError(err.message || "Failed to load content. Please try again later.");
-            setAboutContent([]);
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
     return (
         <div className={styles.mainWrapper}>
@@ -90,7 +46,50 @@ const About = () => {
                                         </div>
                                         <p className={`${styles.typography.textBase} text-center`}>My Nepenthes Ventricosa "Porcelain" 7 years old!</p>
                                     </div>
-                                    {/* ... rest of your image grid ... */}
+
+                                    <div className="flex flex-col items-center w-full">
+                                        <div className="w-full aspect-square bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
+                                            <img
+                                                src="/hills.jpg"
+                                                alt="Hiking Adventures"
+                                                className="object-cover w-full h-full rounded-lg"
+                                            />
+                                        </div>
+                                        <p className={`${styles.typography.textBase} text-center`}>Top of Brasstown Bald</p>
+                                    </div>
+
+                                    <div className="flex flex-col items-center w-full">
+                                        <div className="w-full aspect-square bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
+                                            <img
+                                                src="/sky.png"
+                                                alt="Nature Views"
+                                                className="object-cover w-full h-full rounded-lg"
+                                            />
+                                        </div>
+                                        <p className={`${styles.typography.textBase} text-center`}>Savannah Coast</p>
+                                    </div>
+
+                                    <div className="flex flex-col items-center w-full">
+                                        <div className="w-full aspect-square bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
+                                            <img
+                                                src="/smokeys.png"
+                                                alt="Plant Collection"
+                                                className="object-cover w-full h-full rounded-lg"
+                                            />
+                                        </div>
+                                        <p className={`${styles.typography.textBase} text-center`}>Great Smokey Mountains</p>
+                                    </div>
+
+                                    <div className="flex flex-col items-center w-full">
+                                        <div className="w-full aspect-square bg-white/10 rounded-lg shadow-lg flex items-center justify-center transition-transform hover:scale-105">
+                                            <img
+                                                src="/abg.png"
+                                                alt="Botanical Gardens"
+                                                className="object-cover w-full h-full rounded-lg"
+                                            />
+                                        </div>
+                                        <p className={`${styles.typography.textBase} text-center`}>Atlanta Botanical Gardens</p>
+                                    </div>
                                 </div>
                             </>
                         ) : (
